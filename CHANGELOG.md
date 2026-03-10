@@ -1,3 +1,8 @@
+## 1.0.2
+- **Documentation:** Added comprehensive Dartdoc comments for public API elements.
+- **Features:** Improved code structure and added repository/issue tracker links in pubspec.yaml.
+- **Maintenance:** Updated analysis options for better linting support.
+
 ## 1.0.1
 * Minor internal improvements.
 * Added project preview image in README.

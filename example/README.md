@@ -1,0 +1,1 @@
+This example demonstrates how to use the CustomMasonryGrid widget in a basic Flutter app.

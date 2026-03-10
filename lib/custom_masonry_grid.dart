@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 
+/// A lightweight, reusable, and dependency-free Masonry Grid widget.
+/// 
+/// Perfect for creating image galleries or Pinterest-style layouts.
 class CustomMasonryGrid extends StatelessWidget {
+  /// The list of widgets to display in the grid.
   final List<Widget> items;
-  final int crossAxisCount;
-  final double mainAxisSpacing;
-  final double crossAxisSpacing;
-  final EdgeInsetsGeometry padding;
-  final double borderRadius;
-  final bool isScrollable; 
 
+  /// The number of columns in the grid. Defaults to 2.
+  final int crossAxisCount;
+
+  /// The vertical spacing between items. Defaults to 10.0.
+  final double mainAxisSpacing;
+
+  /// The horizontal spacing between columns. Defaults to 10.0.
+  final double crossAxisSpacing;
+
+  /// The padding around the grid. Defaults to EdgeInsets.zero.
+  final EdgeInsetsGeometry padding;
+
+  /// The border radius for the grid items. Defaults to 8.0.
+  final double borderRadius;
+
+  /// Whether the grid should scroll internally. Defaults to true.
+  final bool isScrollable;
+
+  /// Creates a [CustomMasonryGrid].
   const CustomMasonryGrid({
     super.key,
     required this.items,

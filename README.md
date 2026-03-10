@@ -19,7 +19,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  custom_masonry_grid: ^1.0.1
+  custom_masonry_grid: ^1.0.2
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ CustomMasonryGrid(
   borderRadius: 12.0,
   isScrollable: true,
   items: [
-    Image.network('[https://example.com/image1.jpg](https://example.com/image1.jpg)'),
+    Image.network('https://images.unsplash.com/photo-1772289093030-bc33ef6d4417'),
     Image.asset('assets/image2.png'),
     Container(height: 150, color: Colors.blue),
   ],
