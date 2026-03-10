@@ -52,3 +52,4 @@ CustomMasonryGrid(
 | **padding** | `EdgeInsets` | `EdgeInsets.zero` | The padding around the entire grid. |
 | **borderRadius** | `double` | 8.0 | The corner radius for the grid items. |
 | **isScrollable** | `bool` | true | Whether the grid should scroll internally. |
+

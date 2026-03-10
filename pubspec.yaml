@@ -1,6 +1,6 @@
 name: custom_masonry_grid
 description: A lightweight, reusable custom masonry grid for Flutter gallery without any external dependencies.
-version: 1.0.0
+version: 1.0.1
 
 homepage: https://github.com/oxfaysal/custom_masonry_grid
 
