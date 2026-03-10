@@ -1,0 +1,17 @@
+name: example
+description: Example for custom_masonry_grid package.
+publish_to: 'none' 
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  custom_masonry_grid:
+    path: ../ 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

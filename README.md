@@ -2,6 +2,9 @@
 
 A lightweight, reusable, and dependency-free Masonry Grid widget for Flutter. Perfect for creating image galleries or Pinterest-style layouts.
 
+## Preview
+![Masonry Grid Demo](assets/masonry_demo.jpg)
+
 ## Features
 - **Zero Dependencies:** Pure Flutter code.
 - **Dynamic Height:** Automatically adjusts based on the content.
