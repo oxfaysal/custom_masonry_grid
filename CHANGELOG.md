@@ -1,3 +1,5 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+* Initial release.
+* Added `CustomMasonryGrid` widget with customizable columns, spacing, and padding.
+* Lightweight and dependency-free implementation.
