@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-/// A lightweight, reusable, and dependency-free Masonry Grid widget.
+/// A lightweight, reusable, and dependency-free Masonry Grid widget for Flutter.
 /// 
 /// Features:
-/// - Responsive Column Calculation
-/// - Built-in Shimmer Loading Animation
-/// - Header and Footer Support
-/// - Custom Empty State
-/// - Tap Callbacks and Hover Animation logic
+/// - Responsive Column Calculation based on screen width.
+/// - Built-in Shimmer Loading Animation (Dependency-free).
+/// - Support for Custom Header and Footer widgets.
+/// - Handles Empty States when no items are provided.
+/// - Tap Callbacks with item index.
 class CustomMasonryGrid extends StatefulWidget {
   /// The list of widgets to display in the grid.
   final List<Widget> items;
@@ -15,38 +15,38 @@ class CustomMasonryGrid extends StatefulWidget {
   /// Optional: Fixed number of columns. If null, it calculates based on [maxItemWidth].
   final int? crossAxisCount;
 
-  /// Vertical spacing between items. Defaults to 10.0.
+  /// Vertical spacing between items in a column. Defaults to 10.0.
   final double mainAxisSpacing;
 
   /// Horizontal spacing between columns. Defaults to 10.0.
   final double crossAxisSpacing;
 
-  /// Padding around the entire grid.
+  /// Padding around the entire grid layout. Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
 
-  /// Border radius for each grid item. Defaults to 8.0.
+  /// Border radius applied to each grid item's container. Defaults to 8.0.
   final double borderRadius;
 
-  /// Whether the grid should scroll internally. Defaults to true.
+  /// Whether the grid should handle its own scrolling. Defaults to true.
   final bool isScrollable;
 
-  /// Trigger to show the shimmer loading state.
+  /// Set to true to display the shimmer loading placeholders.
   final bool isLoading;
 
-  /// Number of shimmer placeholders to show during loading.
+  /// Total number of shimmer boxes to show during the loading state.
   final int shimmerCount;
 
-  /// Optional widget that appears at the very top.
+  /// An optional widget displayed at the very top of the grid.
   final Widget? header;
 
-  /// Optional widget that appears at the very bottom.
+  /// An optional widget displayed at the very bottom of the grid.
   final Widget? footer;
 
   /// Widget to display when [items] is empty and [isLoading] is false.
   final Widget? emptyState;
 
-  /// Callback function returning the index of the tapped item.
-  final Function(int index)? onItemTap;
+  /// Callback function triggered when an item is tapped, returning its index.
+  final void Function(int index)? onItemTap;
 
   /// Maximum width allowed per column for responsive layout calculation.
   final double maxItemWidth;
@@ -80,7 +80,7 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
   @override
   void initState() {
     super.initState();
-    // Shimmer animation controller for the sliding gradient effect
+    // Animation controller for the sliding shimmer effect
     _shimmerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -95,18 +95,18 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
 
   @override
   Widget build(BuildContext context) {
-    // Show empty state if not loading and no items
+    // Show empty state if not loading and list is empty
     if (!widget.isLoading && widget.items.isEmpty) {
       return widget.emptyState ?? const Center(child: Text("No items found"));
     }
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Calculate columns: if crossAxisCount is null, use maxItemWidth
-        int columnsToDisplay = widget.crossAxisCount ??
+        // Calculate dynamic columns if crossAxisCount is null
+        final int columnsToDisplay = widget.crossAxisCount ??
             (constraints.maxWidth / widget.maxItemWidth).floor().clamp(1, 10);
 
-        Widget content = _buildGridContent(columnsToDisplay);
+        final Widget content = _buildGridContent(columnsToDisplay);
 
         return widget.isScrollable
             ? SingleChildScrollView(
@@ -119,7 +119,7 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
     );
   }
 
-  /// Builds the main grid structure including Header, Footer, and Items/Shimmer
+  /// Builds the vertical structure containing Header, Grid Row, and Footer
   Widget _buildGridContent(int columns) {
     return Column(
       children: [
@@ -144,16 +144,17 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
     );
   }
 
-  /// Distributes real items into specific columns based on index % totalColumns
+  /// Organizes real items into columns using index modulo logic
   List<Widget> _buildItemColumn(int colIndex, int totalCols) {
-    List<Widget> columnWidgets = [];
+    final List<Widget> columnWidgets = [];
     for (int i = 0; i < widget.items.length; i++) {
       if (i % totalCols == colIndex) {
+        final int index = i; // Local variable for the closure
         columnWidgets.add(
           Padding(
             padding: EdgeInsets.only(bottom: widget.mainAxisSpacing),
             child: GestureDetector(
-              onTap: widget.onTapWrapper(i),
+              onTap: widget.onItemTap != null ? () => widget.onItemTap!(index) : null,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
                 child: widget.items[i],
@@ -166,12 +167,12 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
     return columnWidgets;
   }
 
-  /// Generates shimmer placeholders for the loading state
+  /// Generates animated shimmer placeholders for the loading state
   List<Widget> _buildShimmerColumn(int colIndex, int totalCols) {
-    int itemsInThisCol = (widget.shimmerCount / totalCols).ceil();
+    final int itemsInThisCol = (widget.shimmerCount / totalCols).ceil();
     return List.generate(itemsInThisCol, (index) {
-      // Alternating heights to mimic Masonry variation
-      double height = (index + colIndex) % 2 == 0 ? 200 : 140;
+      // Alternating heights to mimic a masonry layout variation
+      final double height = (index + colIndex) % 2 == 0 ? 200 : 140;
       return _ShimmerBox(
         controller: _shimmerController,
         height: height,
@@ -180,13 +181,9 @@ class _CustomMasonryGridState extends State<CustomMasonryGrid>
       );
     });
   }
-
-  VoidCallback? onTapWrapper(int index) {
-    return widget.onItemTap != null ? () => widget.onItemTap!(index) : null;
-  }
 }
 
-/// Internal helper widget to render the Shimmer animation
+/// A private helper widget that renders the sliding gradient animation
 class _ShimmerBox extends StatelessWidget {
   final Animation<double> controller;
   final double height;
@@ -220,9 +217,9 @@ class _ShimmerBox extends StatelessWidget {
                 Color(0xFFEBEBF4),
               ],
               stops: [
-                controller.value - 0.3,
-                controller.value,
-                controller.value + 0.3,
+                (controller.value - 0.3).clamp(0.0, 1.0),
+                controller.value.clamp(0.0, 1.0),
+                (controller.value + 0.3).clamp(0.0, 1.0),
               ],
             ),
           ),
