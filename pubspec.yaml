@@ -1,6 +1,7 @@
 name: custom_masonry_grid
-description: A lightweight, reusable, and dependency-free Masonry Grid widget for Flutter. Perfect for creating image galleries, Pinterest-style layouts, or dynamic content feeds with built-in loading animations.
-version: 1.0.3
+description: A lightweight, dependency-free Masonry Grid for Flutter. Ideal for Pinterest-style layouts and dynamic image galleries with built-in animations.
+
+version: 1.0.4
 
 homepage: https://github.com/oxfaysal/custom_masonry_grid
 repository: https://github.com/oxfaysal/custom_masonry_grid

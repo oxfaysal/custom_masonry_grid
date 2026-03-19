@@ -4,6 +4,7 @@ A lightweight, reusable, and dependency-free Masonry Grid widget for Flutter. Pe
 
 
 ## Features
+
 - **Zero Dependencies:** Pure Flutter code, no external packages required.
 - **Built-in Shimmer:** Smooth loading animation (Gradient-based) without any extra setup.
 - **Responsive Design:** Automatically calculates columns based on screen width or fixed count.
@@ -16,6 +17,7 @@ A lightweight, reusable, and dependency-free Masonry Grid widget for Flutter. Pe
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/oxfaysal/custom_masonry_grid/main/assets/masonry_demo.png" alt="Custom Masonry Grid Demo" width="100%" />
+  
 </p>
 
 
@@ -26,7 +28,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  custom_masonry_grid: ^1.0.3
+  custom_masonry_grid: ^1.0.4
 ```
 
 ## Usage 🛠️
